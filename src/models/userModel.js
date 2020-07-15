@@ -5,6 +5,8 @@ const jwt = require('jsonwebtoken');
 const uniqueValidator = require("mongoose-unique-validator");
 // const task = require('./task');
 
+const JWT_SECRET = 'mySecretKeyForLiveShopping!!'
+
 const userSchema = new mongoose.Schema({
     fullName: {
         type: String,

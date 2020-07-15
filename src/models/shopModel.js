@@ -50,7 +50,7 @@ const shopSchema = new mongoose.Schema({
 shopSchema.virtual('shopProducts', {
     ref: 'ShopProduct',
     localField: '_id',
-    foreignField: 'shop'
+    foreignField: 'shopId'
 })
 
 shopSchema.plugin(uniqueValidator);

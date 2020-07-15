@@ -6,7 +6,7 @@ const productSchema = new mongoose.Schema({
         required: true,
         trim: true,
     },
-    productDescription: {
+    productDesc: {
         type: String,
         required: true,
         trim: true,
@@ -16,7 +16,7 @@ const productSchema = new mongoose.Schema({
         required: true,
         trim: true,
     },
-    itemAvailable: {
+    available: {
         type: String,
         required: true,
         trim: true,
@@ -26,12 +26,11 @@ const productSchema = new mongoose.Schema({
         required: true,
         trim: true,
     },
-    imageUrl: {
+    productImage: {
         type: String,
         required: false,
-        trim: true,
     },
-    shop: {
+    shopId: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: 'Shop'

@@ -1,7 +1,5 @@
 const express = require('express');
-const multer = require('multer')
 // const sharp = require('sharp')
-const passport = require('passport');
 const UserController = require('../controller/user-controller')
 const router = new express.Router();
 

@@ -28,4 +28,7 @@ const storage = multer.diskStorage({
   },
 });
 
-module.exports = multer({ storage: storage }).single("shopImage");
+module.exports = {
+  shopImage: multer({ storage: storage }).single("shopImage"),
+  productImage: multer({ storage: storage }).single("productImage")
+}
