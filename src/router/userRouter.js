@@ -1,6 +1,9 @@
 const express = require('express');
 // const sharp = require('sharp')
 const UserController = require('../controller/user-controller')
+const auth = require('../middleware/auth')
+
+const { productImage } = require('../middleware/file')
 const router = new express.Router();
 
 
@@ -9,6 +12,14 @@ router.post('/register', UserController.register);
 
 //login
 router.post('/login', UserController.login);
+
+
+// User 
+router.post('/addProduct',auth, productImage, UserController.addProduct);
+router.get('/allUserProducts',auth, UserController.getUserProducts);
+
+
+
 
 // routes.get('/special', passport.authenticate('jwt', { session: false }), (req, res) => {
 //     return res.json({ msg: `Hey ${req.user.email}! I open at the close.` });

@@ -37,7 +37,7 @@ exports.shops = async (req, res, next) => {
         await req.user.populate({
             'path': 'shops',
         }).execPopulate()
-        res.set('Content-Type', 'image/png')
+        // res.set('Content-Type', 'image/png')
         res.status(200).send(req.user.shops);
     } catch (error) {
         res.status(400).send({ code: 'ERROR', message: 'Error occured while registering Shop', error });
@@ -94,7 +94,7 @@ exports.addProduct = async (req, res, next) => {
             ...req.body,
             productImage: url + "/src/images/" + req.file.filename,
             shopId: req.params.shopId,
-            owner: req.user.id
+            owner: req.user._id
         })
         await newProduct.save()
 
@@ -106,6 +106,22 @@ exports.addProduct = async (req, res, next) => {
 }
 
 exports.allProducts = async (req, res, next) => {
+    try {
+
+
+        await req.user.populate({
+            'path': 'allProducts',
+        }).execPopulate()
+
+
+        res.status(200).send(req.user.allProducts);
+    } catch (error) {
+        res.status(400).send({ code: 'ERROR', message: 'Error occured while fetching Products', error });
+        console.log(error);
+    }
+}
+
+exports.allShopProducts = async (req, res, next) => {
     try {
         const existingShop = await Shop.findOne({ _id: req.params.shopId })
 

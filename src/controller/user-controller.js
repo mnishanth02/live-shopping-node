@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 
 
 const User = require("../models/userModel");
+const UserProduct = require("../models/UserProduct");
 
 
 exports.register = async (req, res, next) => {
@@ -44,4 +45,39 @@ exports.login = async (req, res, next) => {
         res.status(400).send({ code: 'ERROR', msg: 'Try with Valid Credentials' });
         console.log(error);
     }
+}
+
+
+exports.addProduct = async (req, res, next) => {
+    try {
+        const url = req.protocol + "://" + req.get("host");
+        const newProduct = new UserProduct({
+            ...req.body,
+            productImage: url + "/src/images/" + req.file.filename,
+            owner: req.user._id
+        })
+        await newProduct.save()
+
+        res.status(200).send({ newProduct });
+    } catch (error) {
+        res.status(400).send({ code: 'ERROR', message: 'Error occured while Adding Product', error });
+        console.log(error);
+    }
+}
+
+exports.getUserProducts = async (req, res, next) => {
+    try {
+
+
+        await req.user.populate({
+            'path': 'allUserProducts',
+        }).execPopulate()
+
+
+        res.status(200).send(req.user.allUserProducts);
+    } catch (error) {
+        res.status(400).send({ code: 'ERROR', message: 'Error occured while fetching Products', error });
+        console.log(error);
+    }
+
 }

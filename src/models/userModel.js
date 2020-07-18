@@ -40,9 +40,6 @@ const userSchema = new mongoose.Schema({
         required: true,
     }
 
-    // avatar: {
-    //     type: Buffer
-    // }
 }, {
     timestamps: true,
 
@@ -53,6 +50,19 @@ userSchema.virtual('shops', {
     localField: '_id',
     foreignField: 'owner'
 })
+
+userSchema.virtual('allProducts', {
+    ref: 'ShopProduct',
+    localField: '_id',
+    foreignField: 'owner'
+})
+
+userSchema.virtual('allUserProducts', {
+    ref: 'UserProduct',
+    localField: '_id',
+    foreignField: 'owner'
+})
+
 userSchema.methods.toJSON = function () {
     const user = this;
     const userObj = user.toObject()
