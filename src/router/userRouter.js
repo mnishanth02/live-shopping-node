@@ -7,7 +7,7 @@ const { productImage } = require('../middleware/file')
 const router = new express.Router();
 
 
-// sign up
+// sign up 
 router.post('/register', UserController.register);
 
 //login
